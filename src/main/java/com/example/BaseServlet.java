@@ -1,5 +1,7 @@
 package com.example;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,23 +16,7 @@ public class BaseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        Integer visitCounter = (Integer) session.getAttribute("visitCounter");
-        if (visitCounter == null) {
-            visitCounter = 1;
-        } else {
-            visitCounter++;
-        }
-        session.setAttribute("visitCounter", visitCounter);
-        String username = req.getParameter("username");
-        resp.setContentType("text/html");
-        PrintWriter printWriter = resp.getWriter();
-        if (username == null) {
-            printWriter.write("Hello, Anonymous" + "<br>");
-        } else {
-            printWriter.write("Hello, " + username + "<br>");
-        }
-        printWriter.write("Page was visited " + visitCounter + " times.");
-        printWriter.close();
+        String path = "/webapp/index.jsp";
+        getServletContext().getRequestDispatcher(path).forward(req, resp);
     }
 }
