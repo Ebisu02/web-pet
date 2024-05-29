@@ -35,9 +35,8 @@ public class LogInServlet extends HttpServlet {
                 String pwd = rs.getString("uPass");
                 if (r_uname.equals(uname) && r_pwd.equals(pwd)) {
                     session.setAttribute("uname", uname);
-                    session.setAttribute("email", rs.getString("email"));
                     JSONObject jo = new JSONObject();
-                    jo.put("status", "succes");
+                    jo.put("status", "success");
                     jo.put("uname", uname);
                     out.println(jo.toString());
                     loggedIn = true;
