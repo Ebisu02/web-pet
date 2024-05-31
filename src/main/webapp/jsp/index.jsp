@@ -19,7 +19,7 @@
     <nav class="nav-items">
         <a href="/home">Главная</a>
         <a href="/recipes">Рецепты</a>
-        <a href="/loginAuthorise">Личный кабинет</a>
+        <a href="/profile">Личный кабинет</a>
     </nav>
 </header>
 <main>

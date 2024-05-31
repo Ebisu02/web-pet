@@ -15,10 +15,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-@WebServlet("/loginAuthorise")
-public class LogInRequestServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path = "/webapp/jsp/login.jsp";
+        getServletContext().getRequestDispatcher(path).forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String r_uname = req.getParameter("uname");
         String r_pwd = req.getParameter("pwd");
         if (!(r_uname.isEmpty() && r_pwd.isEmpty())) {

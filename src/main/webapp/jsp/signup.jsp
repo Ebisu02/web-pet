@@ -1,7 +1,14 @@
-<link rel="stylesheet" href="css/login.css">
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=utf-8" %>
+<html lang="en">
+<style>
+    <%@include file="css/login.css"%>
+</style>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>SignUp/KitchenMate</title>
+</head>
 <body class="align">
 <div class="login">
     <div>

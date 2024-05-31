@@ -1,19 +1,21 @@
- <!DOCTYPE html>
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=utf-8" %>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KitchenMate</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
-  <link rel="stylesheet" href="css/profile.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitchenMate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        <%@include file="css/profile.css"%>
+    </style>
 </head>
 
 <body>
 <header class="header">
-  <a href="#" class="logo">KitchenMate</a>
+  <a href="home" class="logo">KitchenMate</a>
   <nav class="nav-items">
     <a href="home">Главная</a>
     <a href="recipes">Рецепты</a>
@@ -47,9 +49,9 @@
       </div>
       <div>
         </br>
-        <input class="button" type="changePwd" value="Сменить пароль">
+        <input class="changePwd" type="button" value="Сменить пароль">
         </br>
-        <input class="button" type="signOut" value="Выйти из аккаунта">
+        <input class="signOut" type="button" value="Выйти из аккаунта">
       </div>
     </div>
   </div>

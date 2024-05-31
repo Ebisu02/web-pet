@@ -127,15 +127,18 @@ svg {
 /* ---------- BUTTON ---------- */
 
 .submitAbout,
-.button {
+.signOut,
+.changePwd{
   background-color: #5edaf2;
   text-color: #A5A5A;
   color: #000;
   padding: 0.25em 1.5em;
 }
 
-.button:focus,
-.button:hover {
+.signOut:focus,
+.changePwd:focus,
+.signOut:hover,
+.changePwd:hover {
   background-color: #28ad6f;
 }
 
@@ -192,8 +195,7 @@ svg {
 }
 
 .submitAbout,
-.login input[type="changePwd"],
-.login input[type="signOut"] {
+.login input[type="button"] {
   text-align: center;
   height: 2em;
   display: block;

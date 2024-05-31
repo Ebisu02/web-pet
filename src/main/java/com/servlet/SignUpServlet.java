@@ -16,10 +16,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-@WebServlet("/signupReq")
-public class SignUpRequestServlet extends HttpServlet {
+@WebServlet("/signup")
+public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path = "/webapp/jsp/signup.jsp";
+        getServletContext().getRequestDispatcher(path).forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String r_uname = req.getParameter("uname");
         String r_pwd = req.getParameter("pwd");
         String r_pwdCheck = req.getParameter("pwdCheck");
