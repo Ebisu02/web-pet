@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* CSS for header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.header .logo {
+  font-size: 25px;
+  font-family: 'Sriracha', cursive;
+  color: #000;
+  text-decoration: none;
+  margin-left: 30px;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f5f5f5;
+  margin-right: 20px;
+}
+
+.nav-items a {
+  font-size: 20px;
+  font-family: 'Sriracha';
+  text-decoration: none;
+  color: #000;
+  padding: 35px 20px;
+}
+
+/* CSS for main element */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 520px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://plus.unsplash.com/premium_photo-1663852297267-827c73e7529e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* CSS for footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #302f49;
+  padding: 40px 80px;
+}
+
+.footer .copy {
+  color: #fff;
+}
+
+.bottom-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.bottom-links .links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.bottom-links .links span {
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.bottom-links .links a {
+  text-decoration: none;
+  color: #a1a1a1;
+  padding: 10px 20px;
+}
+/*###############################################*/
+@use postcss-preset-env {
+  stage: 0;
+}
+
+/* ---------- GENERAL ---------- */
+
+h2.te {
+  font-size: 1.75em;
+  color: #A5A5A;
+}
+
+input {
+  background-image: none;
+  border: none;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+svg {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* ---------- ALIGN ---------- */
+.align {
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- BUTTON ---------- */
+
+.submitAbout,
+.button {
+  background-color: #5edaf2;
+  text-color: #A5A5A;
+  color: #000;
+  padding: 0.25em 1.5em;
+}
+
+.button:focus,
+.button:hover {
+  background-color: #28ad6f;
+}
+
+/* ---------- ICONS ---------- */
+.icons {
+  display: none;
+}
+
+.icon {
+  fill: currentcolor;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+}
+
+/* ---------- LOGIN ---------- */
+.login {
+  align: center;
+  width: 400px;
+}
+
+.login__header {
+  background-color: #5edaf0;
+  border-top-left-radius: 1.25em;
+  border-top-right-radius: 1.25em;
+  color: #00000;
+  padding: 1.25em 1.625em;
+}
+
+.login__header :first-child {
+  margin-top: 0;
+}
+
+.login__header :last-child {
+  margin-bottom: 0;
+}
+
+.login h2 .icon {
+  margin-right: 14px;
+}
+
+.login__form {
+  background-color: #fff;
+  border-bottom-left-radius: 1.25em;
+  border-bottom-right-radius: 1.25em;
+  color: #777;
+  display: grid;
+  gap: 0.875em;
+  padding: 1.25em 1.625em;
+}
+
+.login input {
+  border-radius: 0.1875em;
+}
+
+.submitAbout,
+.login input[type="changePwd"],
+.login input[type="signOut"] {
+  text-align: center;
+  height: 2em;
+  display: block;
+  margin: 0 auto;
+}
+
+.uAbout {
+  display:block;
+  word-break: break-all;
+}
+
+.aboutContainer {
+  display:inline-block;
+  position:relative;
+}
+
+.submitAbout{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+}

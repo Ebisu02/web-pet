@@ -25,7 +25,8 @@ h2.te {
   color: #A5A5A;
 }
 
-input {
+input,
+textarea {
   background-image: none;
   border: none;
   font: inherit;
@@ -107,12 +108,15 @@ svg {
   padding: 1.25em 1.625em;
 }
 
-.login input {
+.login input,
+.login textarea {
   border-radius: 0.1875em;
 }
 
+.login input[type="text"],
 .login input[type="email"],
-.login input[type="password"] {
+.login input[type="password"],
+.login textarea[name="about"] {
   background-color: #eee;
   color: #777;
   padding: 0.25em 0.625em;
@@ -123,3 +127,20 @@ svg {
   display: block;
   margin: 0 auto;
 }
+
+.login a {
+   font-size: 1em;
+   color: #A5A5A;
+   margin-left: 29%;
+}
+
+.login a:visited {
+   font-size: 1em;
+   color: #A5A5A;
+}
+
+.login a:active {
+   font-size: 1em;
+   color: #A5A5A;
+}
+

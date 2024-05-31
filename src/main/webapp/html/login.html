@@ -4,27 +4,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="align">
     <div class="login">
-        <header class="login__header">
-            <h2>
-                <svg class="icon">
-                    <use xlink:href="#icon-lock" />
-                </svg>
-                KitchenMate
-            </h2>
-        </header>
-        <form action="#" class="login__form" method="POST">
-            <div>
-                <label for="email">Почта/Пароль</label>
-                <input type="email" id="email" name="email" placeholder="почта@gmail.com/имя пользователя">
-            </div>
-            <div>
-                <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" placeholder="пароль">
-            </div>
-            <div>
-                <input class="button" type="submit" value="Войти">
-            </div>
-        </form>
+        <div>
+            <header class="login__header">
+                <h2>
+                    <svg class="icon">
+                        <use xlink:href="#icon-lock" />
+                    </svg>
+                    KitchenMate
+                </h2>
+            </header>
+            <form action="#" class="login__form" method="POST">
+                <div>
+                    <label for="uname">Имя пользователя</label>
+                    <input type="text" id="uname" name="uname" placeholder="Имя пользователя"></input>
+                </div>
+                <div>
+                    <label for="pwd">Пароль</label>
+                    <input type="password" id="pwd" name="pwd" placeholder="Пароль"></input>
+                </div>
+                <div>
+                    <input class="button" type="submit" value="Войти"></input>
+                    <p><a href="/signup">Зарегистрироваться</a></p>
+                </div>
+            </form>
+        </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" class="icons">
         <symbol id="icon-lock" viewBox="0 0 448 512">
