@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = {"/", "/home"})
-public class HomeServlet extends HttpServlet {
+public class GetJsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = /*req.getContextPath() +*/ "/jsp/index.jsp";
-        getServletContext().getRequestDispatcher(path).forward(req, resp);
+        PrintWriter out = resp.getWriter();
+        String path = "/jsp/login/login.jsp";
+
+        out.println(req.getContextPath());
     }
 }

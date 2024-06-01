@@ -19,7 +19,7 @@ import java.sql.Statement;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = "/webapp/jsp/login.jsp";
+        String path = /*req.getContextPath() + */ "/jsp/login/login.jsp";
         getServletContext().getRequestDispatcher(path).forward(req, resp);
     }
 

@@ -10,7 +10,7 @@
     <title>SignUp/KitchenMate</title>
 </head>
 <body class="align">
-<div class="login">
+<div id="root" class="login">
     <div>
         <header class="login__header">
             <h2>
