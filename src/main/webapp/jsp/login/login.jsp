@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="align">
     <div id="root" class="login">
-    <script src="jsp/login/static/js/main.b25b3ec4.js"></script>
+    <script src="jsp/login/static/js/main.23469fcc.js"></script>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" class="icons">
         <symbol id="icon-lock" viewBox="0 0 448 512">
