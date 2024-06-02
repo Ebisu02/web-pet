@@ -2,14 +2,14 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html lang="en">
 <style>
-    <%@include file="static/css/main.5bc941e5.css"%>
+    <%@include file="static/css/main.f7c2372d.css"%>
 </style>
 <link rel="manifest" href="/manifest.json"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body class="align">
     <div id="root" class="login">
-    <script src="jsp/login/static/js/main.4b1ff6b0.js"></script>
+    <script src="jsp/login/static/js/main.b25b3ec4.js"></script>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" class="icons">
         <symbol id="icon-lock" viewBox="0 0 448 512">
