@@ -3,6 +3,7 @@ package com.servlet;
 import com.db.DB_Connector;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import com.sun.tools.javac.util.Log;
+import javax.servlet.http.Cookie;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -36,8 +39,8 @@ public class LoginServlet extends HttpServlet {
                 String basic = stringTokenizer.nextToken();
                 if (basic.equalsIgnoreCase("Basic")) {
                     try {
-                        String decodedCredentials = stringTokenizer.nextToken();
-                        String credentials = new String(Base64.decode(decodedCredentials), "UTF-8");
+                        String encodedCredentials = stringTokenizer.nextToken();
+                        String credentials = new String(Base64.decode(encodedCredentials), "UTF-8");
                         int p = credentials.indexOf(":");
                         if (p != -1) {
                             String r_uname = credentials.substring(0, p).trim();
@@ -57,7 +60,10 @@ public class LoginServlet extends HttpServlet {
                                         session.setAttribute("uname", uname);
                                         JSONObject jo = new JSONObject();
                                         jo.put("status", "success");
+                                        String strToEncode = "true:" + encodedCredentials;
                                         out.println(jo.toString());
+                                        Cookie cookie = new Cookie("isAuthorized", Base64.encode(strToEncode.getBytes()));
+                                        resp.addCookie(cookie);
                                         loggedIn = true;
                                         break;
                                     }

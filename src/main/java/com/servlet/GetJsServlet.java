@@ -13,7 +13,6 @@ public class GetJsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String path = "/jsp/login/login.jsp";
-
         out.println(req.getContextPath());
     }
 }

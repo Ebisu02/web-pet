@@ -6,7 +6,7 @@ public class DB_Connector {
     public static Connection con;
     public static Statement statmt;
     public static ResultSet resSet;
-    private final static String DB_USERS_PATH = "db/users.db";
+    private final static String DB_USERS_PATH = "C:/Program Files/Tomcat/db/users.db";
 
     private static Connection connect(String path) throws ClassNotFoundException, SQLException {
         con = null;

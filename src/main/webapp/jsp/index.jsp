@@ -17,9 +17,9 @@
 <header class="header">
     <a href="#" class="logo">KitchenMate</a>
     <nav class="nav-items">
-        <a href="/home">Главная</a>
-        <a href="/recipes">Рецепты</a>
-        <a href="/profile">Личный кабинет</a>
+        <a href="/untitled/home">Главная</a>
+        <a href="/untitled/recipes">Рецепты</a>
+        <a href="/untitled/profile">Личный кабинет</a>
     </nav>
 </header>
 <main>

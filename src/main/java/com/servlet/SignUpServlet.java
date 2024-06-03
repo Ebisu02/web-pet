@@ -38,7 +38,7 @@ public class SignUpServlet extends HttpServlet {
         Statement stmt = null;
         // 0. Check if pwd = pwdCheck
         // 1. Get next uId
-        // 2. Check if name unique
+        // 2. Check if name&email unique
         // 3. Create statement to add it to db table users
         // 4. Set user as signed up
         // 0
@@ -62,6 +62,13 @@ public class SignUpServlet extends HttpServlet {
             // 2
             while (rs.next()) {
                 String uname = rs.getString("uName");
+                String umail = rs.getString("uMail");
+                if (r_email.equals(umail)) {
+                    JSONObject jo = new JSONObject();
+                    jo.put("status", "nonUniqueEmail");
+                    out.println(jo.toString());
+                    break;
+                }
                 if (r_uname.equals(uname)) {
                     JSONObject jo = new JSONObject();
                     jo.put("status", "nonUniqueName");
