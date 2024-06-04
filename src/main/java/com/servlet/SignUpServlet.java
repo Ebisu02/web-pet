@@ -20,7 +20,7 @@ import java.sql.Statement;
 public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = /*req.getContextPath() +*/ "/jsp/signup.jsp";
+        String path = /*req.getContextPath() +*/ "/jsp/signup/signup.jsp";
         getServletContext().getRequestDispatcher(path).forward(req, resp);
     }
 
@@ -36,18 +36,12 @@ public class SignUpServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         Boolean signedUp = false;
         Statement stmt = null;
-        // 0. Check if pwd = pwdCheck
+        // 0. Get data from Authorization header
         // 1. Get next uId
         // 2. Check if name&email unique
         // 3. Create statement to add it to db table users
         // 4. Set user as signed up
         // 0
-        if (!r_pwd.equals(r_pwdCheck)) {
-            JSONObject jo = new JSONObject();
-            jo.put("status", "pwdEqualsIssue");
-            out.println(jo.toString());
-            // TODO handle when pwd != pwdCheck into ReactApp
-        }
         try {
             Connection con = DB_Connector.connect_to_users();
             stmt = con.createStatement();

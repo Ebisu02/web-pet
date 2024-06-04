@@ -1,6 +1,6 @@
 # TODO-LIST
 ### 1.Signup page
-###### 1.1. Client-side JS React script
+###### 1.1. Client-side JS React script ```DONE```
 ###### 1.2. Server-side signup-algorithm
 ###### 1.3. Link server-side & client-side
 ### 2. Home page
