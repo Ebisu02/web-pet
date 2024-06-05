@@ -86,13 +86,6 @@ public class SignUpServlet extends HttpServlet {
                                         }
                                     } while (rs.next());
                                     // Create statement to add it to db table users
-                                    User user = new User(
-                                            count,
-                                            r_uname,
-                                            r_pwd,
-                                            r_email,
-                                            r_about
-                                    );
                                     stmt.executeUpdate("INSERT INTO users VALUES (" + count
                                             + ",'" + r_uname + "','" + r_pwd + "','" + r_email + "','" + r_about + "')");
                                     // Set user as signed up (send status==success)
