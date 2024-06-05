@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html lang="en">
 <style>
-    <%@include file="jsp/signup/static/css/main.09c55e95.css"%>
+    <%@include file="static/css/main.09c55e95.css"%>
 </style>
 <link rel="manifest" href="/manifest.json"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
