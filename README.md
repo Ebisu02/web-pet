@@ -4,7 +4,7 @@
 ###### 1.2. Server-side signup-algorithm ```DONE```
 ###### 1.3. Link server-side & client-side ```DONE```
 ### 2. Home page
-###### 2.1. Logic for render href "Profile" when user is logged in and render hrefs "LogIn/SignUp" when user isnt logged in
+###### 2.1. Logic for render href "Profile" when user is logged in and render hrefs "LogIn/SignUp" when user isnt logged in ```DONE```
 ### 3.Profile page
 ###### 3.1. JS Script to fill the empty containers
 ###### 3.2. Logic for procedure "Change password"

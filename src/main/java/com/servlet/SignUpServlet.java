@@ -4,6 +4,7 @@ import com.db.DB_Connector;
 import com.model.User;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.json.JSONObject;
+import java.util.regex.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.StringTokenizer;
@@ -51,6 +53,9 @@ public class SignUpServlet extends HttpServlet {
                                 String r_pwd = credentials.substring(p + 1).trim();
                                 String r_email = mailAndAbout.substring(0, z).trim();
                                 String r_about = mailAndAbout.substring(z + 1).trim();
+                                if (!r_email.matches("^[\\w-\\.]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$")) {
+                                    throw new Exception("nonUniqueEmail");
+                                }
                                 if (!(r_uname.isEmpty() && r_pwd.isEmpty() && r_email.isEmpty())) {
                                     if (r_about.isEmpty()) {
                                         r_about = "-";
@@ -86,16 +91,18 @@ public class SignUpServlet extends HttpServlet {
                                         }
                                     } while (rs.next());
                                     // Create statement to add it to db table users
-                                    stmt.executeUpdate("INSERT INTO users VALUES (" + count
-                                            + ",'" + r_uname + "','" + r_pwd + "','" + r_email + "','" + r_about + "')");
+                                    PreparedStatement stmtInsert = con.prepareStatement("INSERT INTO users (uId, uName, uPass, uMail, uAbout)" +
+                                            "VALUES (?, ?, ?, ?, ?)");
+                                    stmtInsert.setInt(1, count);
+                                    stmtInsert.setString(2, r_uname);
+                                    stmtInsert.setString(3, r_pwd);
+                                    stmtInsert.setString(4, r_email);
+                                    stmtInsert.setString(5, r_about);
+                                    stmtInsert.executeUpdate();
                                     // Set user as signed up (send status==success)
                                     signedUp = true;
                                     JSONObject jo = new JSONObject();
                                     jo.put("status", "success");
-                                    jo.put("name", r_uname);
-                                    jo.put("pwd", r_pwd);
-                                    jo.put("name", r_email);
-                                    jo.put("name", r_about);
                                     out.println(jo.toString());
                                     con.close();
                                 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = /*req.getContextPath() +*/ "/jsp/index.jsp";
+        String path = /*req.getContextPath() +*/ "/jsp/homepage/index.jsp";
         getServletContext().getRequestDispatcher(path).forward(req, resp);
     }
 }
