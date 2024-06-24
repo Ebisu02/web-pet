@@ -20,18 +20,7 @@ public class UserService {
     // Login process
     public static boolean login(String name, String pass) {
         try {
-            Connection con = Connector.connect_to_users();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-            while (rs.next()) {
-                String uname = rs.getString("uName");
-                String pwd = rs.getString("uPass");
-                if (!(name.equals(uname) && pass.equals(pwd))) {
-                    throw new Exception("Failed authentication name!=nameDB or pass!=passDB");
-                }
-                break;
-            }
-            return true;
+            return UserRepository.checkNameAndPassword(name, pass);
         } catch (Exception e) {
             return false;
         }

@@ -19,6 +19,27 @@ public class UserRepository {
         return profileData;
     }
 
+    // Comparing data what user entered: {Login, Password} with data on Database {DBLogin, DBPassword}
+    public static boolean checkNameAndPassword(String name, String pass) throws SQLException, ClassNotFoundException {
+        Connection con = Connector.connect_to_users();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+        while (rs.next()) {
+            String uname = rs.getString("uName");
+            String pwd = rs.getString("uPass");
+            if (name.equals(uname) && pass.equals(pwd)) {
+                rs.close();
+                stmt.close();
+                con.close();
+                return true;
+            }
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+        return false;
+    }
+
     // Returns a next id in table 'users' from database
     public static Integer getNextIdFromTableUsers() throws SQLException, ClassNotFoundException {
         Connection con = Connector.connect_to_users();
