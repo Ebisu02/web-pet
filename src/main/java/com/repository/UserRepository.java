@@ -19,7 +19,7 @@ public class UserRepository {
         return profileData;
     }
 
-    // Returns a next Id in table 'users' from database
+    // Returns a next id in table 'users' from database
     public static Integer getNextIdFromTableUsers() throws SQLException, ClassNotFoundException {
         Connection con = Connector.connect_to_users();
         Statement stmt = con.createStatement();

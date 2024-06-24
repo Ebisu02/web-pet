@@ -10,13 +10,13 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import javax.servlet.ServletException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class UserService {
+    private static String encodedCredentials;
+
     // Login process
     public static boolean login(String name, String pass) {
         try {
@@ -60,7 +60,7 @@ public class UserService {
     }
 
     // Returns a Credential Entity: {name, email}
-    public static Credentials getCredentials(StringTokenizer stringTokenizer, String encodedCredentials) throws ServletException, UnsupportedEncodingException {
+    public static Credentials getCredentials(StringTokenizer stringTokenizer) throws ServletException, UnsupportedEncodingException {
         if (!stringTokenizer.hasMoreTokens()) {
             throw new ServletException("StringTokenizer has no more tokens");
         }
@@ -127,5 +127,12 @@ public class UserService {
             about = "-";
         }
         return new User(id, name, pass, email, about);
+    }
+
+    public static String getEncodedCredentials() {
+        if (encodedCredentials.equals(null)) {
+            return null;
+        }
+        return encodedCredentials;
     }
 }

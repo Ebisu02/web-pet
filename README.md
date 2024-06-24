@@ -10,10 +10,10 @@
 ###### 3.2. Logic for procedure "Change password" ```DONE```
 ###### 3.3. Logic for procedure "Log out" ```DONE```
 ### 4. Recipes page
-###### 4.1. Make a HTML-page and a HTML-container for recipe list item
-###### 4.2 Make a JS React Component what will render recipe list item
-###### 4.3. Make a JS React logic what will request from server data what needed to render recipe list item Component
-###### 4.3. Make a server-side logic when we return the data what we need to render recipe list-item
-###### 4.4. Link it up
+###### 4.1. Make a HTML-page and a HTML-container for recipe list item ```DONE```
+###### 4.2 Make a JS React Component what will render recipe list item ```DONE```
+###### 4.3. Make a JS React logic what will request from server data what needed to render recipe list item Component ```DONE```
+###### 4.3. Make a server-side logic when we return the data what we need to render recipe list-item ```DONE```
+###### 4.4. Link it up ```DONE```
 ### 5. Test's
 ###### 5.1 Make a tests for all this fucking shit

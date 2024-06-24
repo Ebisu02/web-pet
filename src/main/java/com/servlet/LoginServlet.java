@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         }
         try {
             StringTokenizer stringTokenizer = new StringTokenizer(authHeader);
-            Credentials credentials = UserService.getCredentials(stringTokenizer, encodedCredentials);
+            Credentials credentials = UserService.getCredentials(stringTokenizer);
             HttpSession session = req.getSession();
             Boolean loggedIn = UserService.login(credentials.getName(), credentials.getPass());
             if (!loggedIn) {
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             }
             session.setAttribute("uname", credentials.getName());
             PostService.postStatus(out, "success");
-            PostService.setAuthorizationTokenInCookie(encodedCredentials, resp);
+            PostService.setAuthorizationTokenInCookie(UserService.getEncodedCredentials(), resp);
         } catch (Exception e) {
             PostService.postExceptionStatus(out, "failed", e);
         }

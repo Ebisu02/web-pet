@@ -1,7 +1,7 @@
 package com.servlet;
 
-import com.Exception.NonUniqueEmailException;
-import com.Exception.NonUniqueNameException;
+import com.exception.NonUniqueEmailException;
+import com.exception.NonUniqueNameException;
 import com.model.User;
 import com.repository.UserRepository;
 import com.service.PostService;

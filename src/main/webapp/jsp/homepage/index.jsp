@@ -14,7 +14,7 @@
 </head>
 
 <body id = "root">
-    <script src="jsp/homepage/static/js/main.c2f609cd.js"></script>
+    <script src="jsp/homepage/static/js/main.c4865467.js"></script>
 </body>
 
 </html>

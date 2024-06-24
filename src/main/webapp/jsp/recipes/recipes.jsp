@@ -16,7 +16,7 @@
 <noscript>You need to enable JavaScript to run this app.</noscript>
 
 <body id ="root">
-    <script src="jsp/recipes/static/js/main.0ae5c4ae.js"></script>
+    <script src="jsp/recipes/static/js/main.aa6a7ad4.js"></script>
 </body>
 
 </html>
