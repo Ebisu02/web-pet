@@ -1,13 +1,11 @@
 package com.servlet;
 
-import com.db.DB_Connector;
+import com.repository.Connector;
 import com.google.gson.Gson;
 import com.model.Recipe;
-import org.json.JSONArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -44,7 +41,7 @@ public class RecipeServlet extends HttpServlet {
         }
         ArrayList<Recipe> recipes = new ArrayList<>();
         try {
-            Connection con = DB_Connector.connect_to_recipes();
+            Connection con = Connector.connect_to_recipes();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Recipes DESC LIMIT 5 OFFSET " + pageCounter.toString());
             while (rs.next()) {

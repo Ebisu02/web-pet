@@ -1,10 +1,8 @@
 package com.servlet;
 
-import com.db.DB_Connector;
-import com.model.User;
+import com.repository.Connector;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.json.JSONObject;
-import java.util.regex.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,7 +62,7 @@ public class SignUpServlet extends HttpServlet {
                                     resp.addHeader("Access-Control-Allow-Origin", "*");
                                     Boolean signedUp = false;
                                     Statement stmt = null;
-                                    Connection con = DB_Connector.connect_to_users();
+                                    Connection con = Connector.connect_to_users();
                                     stmt = con.createStatement();
                                     // Get next uId
                                     ResultSet inc = stmt.executeQuery("SELECT * FROM users ORDER BY uId DESC LIMIT 1");

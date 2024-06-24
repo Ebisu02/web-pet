@@ -1,8 +1,10 @@
 package com.servlet;
 
-import com.db.DB_Connector;
+import com.model.ProfileData;
+import com.repository.Connector;
+import com.service.PostService;
+import com.service.UserService;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,53 +38,13 @@ public class ProfileServlet extends HttpServlet {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("isAuthorized")) {
                     encodedCookie = cookie.getValue();
-                    String name = getUsername(encodedCookie);
-                    ArrayList<String> emailAndAbout = getEmailAndAbout(name);
-                    sendProfileDataAsJSON(out, name, emailAndAbout.get(0), emailAndAbout.get(1));
+                    String name = UserService.getUsername(encodedCookie);
+                    ProfileData profileData = UserService.getProfileDataByUsername(name);
+                    PostService.sendProfileDataAsJSON(out, profileData.getName(), profileData.getEmail(), profileData.getAbout());
                 }
             }
-        } catch(Exception e){
-            out.println(e.getMessage());
-        }
-    }
-
-    private void sendProfileDataAsJSON(PrintWriter out, String name, String email, String about) {
-        if (out != null) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", name);
-            jsonObject.put("mail", email);
-            jsonObject.put("i", about);
-            out.println(jsonObject.toString());
-        }
-    }
-
-    // 0 - Email
-    // 1 - About
-    private ArrayList<String> getEmailAndAbout(String username) {
-        try {
-            Connection con = DB_Connector.connect_to_users();
-            PreparedStatement stmt = con.prepareStatement("SELECT uMail, uAbout FROM users WHERE uName = ?");
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<String> emailAndAbout = new ArrayList<String>();
-            emailAndAbout.add(rs.getString("uMail"));
-            emailAndAbout.add(rs.getString("uAbout"));
-            return emailAndAbout;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private String getUsername(String encodedCookie) throws UnsupportedEncodingException {
-        try {
-            String username = new String(Base64.decode(encodedCookie), "UTF-8");
-            username = new String(Base64.decode(username.replace("true:", "")), "UTF-8");
-            int indexOfTwoDots = username.indexOf(":");
-            username = username.split(":")[0];
-            return username;
-        }
-        catch (Exception e) {
-            throw e;
+        } catch(Exception e) {
+            PostService.postExceptionStatus(out, "failed", e);
         }
     }
 }

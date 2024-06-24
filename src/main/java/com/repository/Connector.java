@@ -1,13 +1,12 @@
-package com.db;
+package com.repository;
 
 import java.sql.*;
 
-public class DB_Connector {
+public class Connector {
     public static Connection con;
-    public static Statement statmt;
-    public static ResultSet resSet;
     private final static String DB_USERS_PATH = "C:/Program Files/Tomcat/db/users.db";
     private final static String DB_RECIPES_PATH = "C:/Program Files/Tomcat/db/recipes.db";
+
     private static Connection connect(String path) throws ClassNotFoundException, SQLException {
         con = null;
         Class.forName("org.sqlite.JDBC");
