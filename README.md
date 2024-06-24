@@ -6,9 +6,9 @@
 ### 2. Home page
 ###### 2.1. Logic for render href "Profile" when user is logged in and render hrefs "LogIn/SignUp" when user isnt logged in ```DONE```
 ### 3.Profile page
-###### 3.1. JS Script to fill the empty containers
-###### 3.2. Logic for procedure "Change password"
-###### 3.3. Logic for procedure "Log out"
+###### 3.1. JS Script to fill the empty containers ```DONE```
+###### 3.2. Logic for procedure "Change password" ```DONE```
+###### 3.3. Logic for procedure "Log out" ```DONE```
 ### 4. Recipes page
 ###### 4.1. Make a HTML-page and a HTML-container for recipe list item
 ###### 4.2 Make a JS React Component what will render recipe list item
