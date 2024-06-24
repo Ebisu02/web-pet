@@ -1,7 +1,6 @@
 package com.servlet;
 
 import com.model.Credentials;
-import com.service.CredentialsService;
 import com.service.PostService;
 import com.service.UserService;
 
@@ -35,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         }
         try {
             StringTokenizer stringTokenizer = new StringTokenizer(authHeader);
-            Credentials credentials = CredentialsService.getCredentials(stringTokenizer, encodedCredentials);
+            Credentials credentials = UserService.getCredentials(stringTokenizer, encodedCredentials);
             HttpSession session = req.getSession();
             Boolean loggedIn = UserService.login(credentials.getName(), credentials.getPass());
             if (!loggedIn) {

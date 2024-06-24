@@ -15,10 +15,12 @@ public class Connector {
         return con;
     }
 
+    // Returns a connection to table users
     public static Connection connect_to_users() throws ClassNotFoundException, SQLException {
         return connect(DB_USERS_PATH);
     }
 
+    // Return a connection to table recipes
     public static Connection connect_to_recipes() throws ClassNotFoundException, SQLException {
         return connect(DB_RECIPES_PATH);
     }

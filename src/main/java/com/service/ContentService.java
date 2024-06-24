@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class ContentService {
+    // Posting image to servlet context
     public static void serveImage(ServletContext context, HttpServletResponse response, String path) throws IOException {
         File imageFile = new File("/images/" + path.substring("/images/".length()));
         if (imageFile.exists()) {
@@ -25,6 +26,7 @@ public class ContentService {
         }
     }
 
+    // Posting html-page to servlet context
     public static void serveHtml(HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");

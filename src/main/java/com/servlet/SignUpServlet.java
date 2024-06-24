@@ -1,8 +1,11 @@
 package com.servlet;
 
-import com.repository.Connector;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import org.json.JSONObject;
+import com.Exception.NonUniqueEmailException;
+import com.Exception.NonUniqueNameException;
+import com.model.User;
+import com.repository.UserRepository;
+import com.service.PostService;
+import com.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.StringTokenizer;
 
 @WebServlet("/signup")
@@ -26,107 +25,32 @@ public class SignUpServlet extends HttpServlet {
         getServletContext().getRequestDispatcher(path).forward(req, resp);
     }
 
-    // 0. Get data from Registration header
-    // 1. Get next uId
-    // 2. Check if name&email unique
-    // 3. Create statement to add it to db table users
-    // 4. Set user as signed up (send status==success)
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String r_regHeader = req.getHeader("Registration");
+        String registrationHeader = req.getHeader("Registration");
+        HttpSession session = req.getSession();
+        resp.addHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = resp.getWriter();
-        if (r_regHeader != null) {
-            StringTokenizer stringTokenizer = new StringTokenizer(r_regHeader);
-            if (stringTokenizer.hasMoreTokens()) {
-                String basic = stringTokenizer.nextToken();
-                if (basic.equalsIgnoreCase("Basic")) {
-                    try {
-                        String credentials = new String(Base64.decode(stringTokenizer.nextToken()));
-                        String other = stringTokenizer.nextToken();
-                        if (other.equalsIgnoreCase("Other")) {
-                            String mailAndAbout = new String(Base64.decode(stringTokenizer.nextToken()));
-                            int p = credentials.indexOf(":"), z = mailAndAbout.indexOf(":");
-                            if (p != -1 && z != -1) {
-                                String r_uname = credentials.substring(0, p).trim();
-                                String r_pwd = credentials.substring(p + 1).trim();
-                                String r_email = mailAndAbout.substring(0, z).trim();
-                                String r_about = mailAndAbout.substring(z + 1).trim();
-                                if (!r_email.matches("^[\\w-\\.]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$")) {
-                                    throw new Exception("nonUniqueEmail");
-                                }
-                                if (!(r_uname.isEmpty() && r_pwd.isEmpty() && r_email.isEmpty())) {
-                                    if (r_about.isEmpty()) {
-                                        r_about = "-";
-                                    }
-                                    HttpSession session = req.getSession();
-                                    resp.addHeader("Access-Control-Allow-Origin", "*");
-                                    Boolean signedUp = false;
-                                    Statement stmt = null;
-                                    Connection con = Connector.connect_to_users();
-                                    stmt = con.createStatement();
-                                    // Get next uId
-                                    ResultSet inc = stmt.executeQuery("SELECT * FROM users ORDER BY uId DESC LIMIT 1");
-                                    Integer count = 1;
-                                    if (inc.next()) {
-                                        count = inc.getInt("uId");
-                                    }
-                                    count++;
-                                    // Check if name & email are unique
-                                    ResultSet rs = stmt.executeQuery("SELECT uName FROM users");
-                                    do {
-                                        String uname = rs.getString("uName");
-                                        if (r_uname.equals(uname)) {
-                                            con.close();
-                                            throw new Exception("nonUniqueName");
-                                        }
-                                    } while(rs.next());
-                                    rs = stmt.executeQuery("SELECT uMail FROM users");
-                                    do {
-                                        String umail = rs.getString("uMail");
-                                        if (r_email.equals(umail)) {
-                                            con.close();
-                                            throw new Exception("nonUniqueEmail");
-                                        }
-                                    } while (rs.next());
-                                    // Create statement to add it to db table users
-                                    PreparedStatement stmtInsert = con.prepareStatement("INSERT INTO users (uId, uName, uPass, uMail, uAbout)" +
-                                            "VALUES (?, ?, ?, ?, ?)");
-                                    stmtInsert.setInt(1, count);
-                                    stmtInsert.setString(2, r_uname);
-                                    stmtInsert.setString(3, r_pwd);
-                                    stmtInsert.setString(4, r_email);
-                                    stmtInsert.setString(5, r_about);
-                                    stmtInsert.executeUpdate();
-                                    // Set user as signed up (send status==success)
-                                    signedUp = true;
-                                    JSONObject jo = new JSONObject();
-                                    jo.put("status", "success");
-                                    out.println(jo.toString());
-                                    con.close();
-                                }
-                            }
-                        }
-                    } catch(Exception e) {
-                        String msg = e.getMessage();
-                        JSONObject jo = new JSONObject();
-                        switch (msg) {
-                            case "nonUniqueName":
-                                jo.put("status", "nonUniqueName");
-                                out.println(jo.toString());
-                                break;
-                            case "nonUniqueEmail":
-                                jo.put("status", "nonUniqueEmail");
-                                out.println(jo.toString());
-                                break;
-                            default:
-                                jo.put("status", "failed");
-                                jo.put("exception", e);
-                                out.println(jo.toString());
-                                break;
-                        }
-                    }
-                }
+        if (registrationHeader.equals(null)) {
+            throw new ServletException("RegistrationHeader is null");
+        }
+        StringTokenizer stringTokenizer = new StringTokenizer(registrationHeader);
+        try {
+            User user = UserService.register(UserRepository.getNextIdFromTableUsers(), stringTokenizer);
+            if (!UserRepository.checkIsNameUnique(user.getName())) {
+                throw new NonUniqueNameException();
             }
+            if (!UserRepository.checkIsEmailUnique(user.getEmail())) {
+                throw new NonUniqueEmailException();
+            }
+            UserRepository.insertUserIntoDatabase(user);
+            PostService.postStatus(out, PostService.STATUS_SUCCESS);
+        } catch (NonUniqueNameException e) {
+            PostService.postExceptionStatus(out, "nonUniqueName", e);
+        } catch (NonUniqueEmailException e) {
+            PostService.postExceptionStatus(out, "nonUniqueEmail", e);
+        } catch(Exception e) {
+            PostService.postExceptionStatus(out, PostService.STATUS_FAILED, e);
         }
     }
 }
