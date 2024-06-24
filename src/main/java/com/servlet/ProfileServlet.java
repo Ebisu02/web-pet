@@ -1,10 +1,8 @@
 package com.servlet;
 
 import com.model.ProfileData;
-import com.repository.Connector;
 import com.service.PostService;
 import com.service.UserService;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
